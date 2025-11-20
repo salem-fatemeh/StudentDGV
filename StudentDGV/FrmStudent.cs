@@ -32,6 +32,10 @@ namespace StudentDGV
             students.Add(Person);
             FillDGV();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        
         private void btnRemove_Click(object sender, EventArgs e)
         {
             var Person = new Person();
