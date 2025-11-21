@@ -32,13 +32,9 @@ namespace StudentDGV
             students.Add(Person);
             FillDGV();
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            var Person = new Person();
+            var person = new Person();
             var nCode = txtNationalCode.Text;
             for (int i = 0; i < students.Count; i++)
             {
@@ -48,7 +44,6 @@ namespace StudentDGV
             FillDGV();
 
         }
-
         private void FillDGV()
         {
             var frmFirst = Application.OpenForms[nameof(FrmFirst)] as FrmFirst;
