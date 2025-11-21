@@ -158,11 +158,6 @@
         }
 
         #endregion
-
-        private TextBox txtName;
-        private TextBox txtFamily;
-        private TextBox txtNationalCode;
-        private TextBox txtGender;
         private Button btnSave;
         private Label label1;
         private Label label2;
@@ -170,5 +165,9 @@
         private Label label4;
         private Button btnRemove;
         private Button btnEdit;
+        public TextBox txtName;
+        public TextBox txtFamily;
+        public TextBox txtNationalCode;
+        public TextBox txtGender;
     }
 }

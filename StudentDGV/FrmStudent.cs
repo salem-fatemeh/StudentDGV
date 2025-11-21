@@ -15,49 +15,31 @@ namespace StudentDGV
     public partial class FrmStudent : Form
     {
         List<Person> students = new List<Person>();
+        Person person = new Person();
         public FrmStudent()
         {
             InitializeComponent();
         }
 
-        private bool Validation(out string msg)
-        {
-            string name = txtName.Text;
-            string lastName = txtFamily.Text;
-            string gender = txtGender.Text;
-
-            var v1 = string.IsNullOrEmpty(name);
-            var v2 = string.IsNullOrEmpty(lastName);
-            var v3 = string.IsNullOrEmpty(gender);
-            if (v1 || v2 || v3)
-            {
-                msg = "لطفا اطلاعات را تکمیل کنید";
-                return false;
-            }
-            msg = "";
-            return true;
-        }
+        
         private void btnSave_Click(object sender, EventArgs e)
-        {
-            string msg;
-            int natioalCode = int.Parse(txtNationalCode.Text);
+        {   
+            
+            person.FirstName = txtName.Text;
+            person.LastName = txtFamily.Text;
+            person.NationalCode = txtNationalCode.Text;
+            person.Gender = txtGender.Text;
 
-            var valid = Validation(out msg);
-            if (!valid)
-            {
-                MessageBox.Show(msg);
-                return;
-            }
-
-            var Person = new Person();
-            Person.FirstName = txtName.Text;
-            Person.LastName = txtFamily.Text;
-            Person.NationalCode = txtNationalCode.Text;
-            Person.Gender = txtGender.Text;
 
             var frmFirst = Application.OpenForms[nameof(FrmFirst)] as FrmFirst;
-            students.Add(Person);
-            FillDGV();
+            var isValid = person.Validation();
+            if (isValid.IsSuccess)
+            {
+                students.Add(person);
+            }
+            else
+                MessageBox.Show(isValid.Message);
+                FillDGV();
         }
         private void btnRemove_Click(object sender, EventArgs e)
         {
