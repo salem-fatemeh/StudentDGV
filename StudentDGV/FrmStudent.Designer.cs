@@ -38,6 +38,7 @@
             label3 = new Label();
             label4 = new Label();
             btnRemove = new Button();
+            btnEdit = new Button();
             SuspendLayout();
             // 
             // txtName
@@ -70,7 +71,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(206, 185);
+            btnSave.Location = new Point(264, 185);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(89, 26);
             btnSave.TabIndex = 1;
@@ -116,13 +117,23 @@
             // 
             // btnRemove
             // 
-            btnRemove.Location = new Point(119, 185);
+            btnRemove.Location = new Point(82, 185);
             btnRemove.Name = "btnRemove";
             btnRemove.Size = new Size(81, 26);
             btnRemove.TabIndex = 3;
             btnRemove.Text = "حذف";
             btnRemove.UseVisualStyleBackColor = true;
             btnRemove.Click += btnRemove_Click;
+            // 
+            // btnEdit
+            // 
+            btnEdit.Location = new Point(169, 185);
+            btnEdit.Name = "btnEdit";
+            btnEdit.Size = new Size(89, 26);
+            btnEdit.TabIndex = 1;
+            btnEdit.Text = "ویرایش";
+            btnEdit.UseVisualStyleBackColor = true;
+            btnEdit.Click += btnEdit_Click;
             // 
             // FrmStudent
             // 
@@ -134,6 +145,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            Controls.Add(btnEdit);
             Controls.Add(btnSave);
             Controls.Add(txtGender);
             Controls.Add(txtNationalCode);
@@ -157,5 +169,6 @@
         private Label label3;
         private Label label4;
         private Button btnRemove;
+        private Button btnEdit;
     }
 }

@@ -21,7 +21,7 @@ namespace StudentDGV
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            
+
             var Person = new Person();
             Person.FirstName = txtName.Text;
             Person.LastName = txtFamily.Text;
@@ -34,7 +34,7 @@ namespace StudentDGV
         }
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            var person = new Person();
+            
             var nCode = txtNationalCode.Text;
             for (int i = 0; i < students.Count; i++)
             {
@@ -44,10 +44,27 @@ namespace StudentDGV
             FillDGV();
 
         }
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            var nCode = txtNationalCode.Text;
+            for (int i = 0; i < students.Count; i++)
+            {
+                if (students[i].NationalCode == nCode)
+                {
+                    students[i].FirstName= txtName.Text;
+                    students[i].LastName= txtFamily.Text;
+                    students[i].Gender= txtGender.Text;
+                }
+            }
+            FillDGV();
+
+        }
         private void FillDGV()
         {
             var frmFirst = Application.OpenForms[nameof(FrmFirst)] as FrmFirst;
             frmFirst.dgvStudent.DataSource = students.ToList();
         }
+
+        
     }
 }
