@@ -15,7 +15,7 @@ namespace StudentDGV
     public partial class FrmStudent : Form
     {
         List<Person> students = new List<Person>();
-        Person person = new Person();
+       
         public FrmStudent()
         {
             InitializeComponent();
@@ -24,27 +24,38 @@ namespace StudentDGV
         
         private void btnSave_Click(object sender, EventArgs e)
         {   
-            
+            var person=new Person();
             person.FirstName = txtName.Text;
             person.LastName = txtFamily.Text;
             person.NationalCode = txtNationalCode.Text;
             person.Gender = txtGender.Text;
 
-
-            var frmFirst = Application.OpenForms[nameof(FrmFirst)] as FrmFirst;
             var isValid = person.Validation();
+            
             if (isValid.IsSuccess)
             {
-                students.Add(person);
+                if (!txtNationalCode.Text.NCodeValidation().IsSuccess)
+                {
+                    MessageBox.Show(txtNationalCode.Text.NCodeValidation().Message);
+                    return;
+                }
+                    students.Add(person);
             }
             else
                 MessageBox.Show(isValid.Message);
-                FillDGV();
+
+            FillDGV();
         }
         private void btnRemove_Click(object sender, EventArgs e)
         {
             
             var nCode = txtNationalCode.Text;
+            if (!txtNationalCode.Text.NCodeValidation().IsSuccess)
+            {
+                MessageBox.Show(txtNationalCode.Text.NCodeValidation().Message);
+                return;
+            }
+
             for (int i = 0; i < students.Count; i++)
             {
                 if (students[i].NationalCode == nCode)
@@ -55,13 +66,20 @@ namespace StudentDGV
         }
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            
             var nCode = txtNationalCode.Text;
+            if (!txtNationalCode.Text.NCodeValidation().IsSuccess)
+            {
+                MessageBox.Show(txtNationalCode.Text.NCodeValidation().Message);
+                return;
+            }
             for (int i = 0; i < students.Count; i++)
             {
                 if (students[i].NationalCode == nCode)
                 {
                     students[i].FirstName= txtName.Text;
                     students[i].LastName= txtFamily.Text;
+                    students[i].NationalCode = txtNationalCode.Text;
                     students[i].Gender= txtGender.Text;
                 }
             }

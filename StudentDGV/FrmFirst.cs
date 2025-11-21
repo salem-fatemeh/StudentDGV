@@ -2,7 +2,7 @@ namespace StudentDGV
 {
     public partial class FrmFirst : Form
     {
-       
+        
         public FrmFirst()
         {
             InitializeComponent();
