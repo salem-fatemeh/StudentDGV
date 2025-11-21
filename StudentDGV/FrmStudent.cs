@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,8 +20,33 @@ namespace StudentDGV
             InitializeComponent();
         }
 
+        private bool Validation(string name, string lastName, string gender, out string msg)
+        {
+            var v1 = string.IsNullOrEmpty(name);
+            var v2 = string.IsNullOrEmpty(lastName);
+            var v3 = string.IsNullOrEmpty(gender);
+            if (v1 || v2 || v3)
+            {
+                msg = "لطفا اطلاعات را تکمیل کنید";
+                return false;
+            }
+            msg = "";
+            return true;
+        }
         private void btnSave_Click(object sender, EventArgs e)
         {
+            string msg;
+            string name = txtName.Text;
+            string lastName = txtFamily.Text;
+            string gender = txtGender.Text;
+            int natioalCode = int.Parse(txtNationalCode.Text);
+
+            var valid = Validation(name, lastName, gender, out msg);
+            if (!valid)
+            {
+                MessageBox.Show(msg);
+                return;
+            }
 
             var Person = new Person();
             Person.FirstName = txtName.Text;
