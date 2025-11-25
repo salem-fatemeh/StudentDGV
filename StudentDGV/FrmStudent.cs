@@ -23,26 +23,30 @@ namespace StudentDGV
 
         
         private void btnSave_Click(object sender, EventArgs e)
-        {   
-            var person=new Person();
-            person.FirstName = txtName.Text;
-            person.LastName = txtFamily.Text;
-            person.NationalCode = txtNationalCode.Text;
-            person.Gender = txtGender.Text;
-
-            var isValid = person.Validation();
-            
-            if (isValid.IsSuccess)
+        {
+            var person = new Person
             {
-                if (!txtNationalCode.Text.NCodeValidation().IsSuccess)
+                FirstName = txtName.Text,
+                LastName = txtFamily.Text,
+                NationalCode= txtNationalCode.Text,
+                Gender=txtGender.Text
+            };
+
+            var valid = person.Validation();
+            var nCode = txtNationalCode.Text;
+            var validateNationalCode = nCode.NCodeValidation();
+
+            if (valid.IsSuccess)
+            {
+                if (!validateNationalCode.IsSuccess)
                 {
-                    MessageBox.Show(txtNationalCode.Text.NCodeValidation().Message);
+                    MessageBox.Show(validateNationalCode.Message);
                     return;
                 }
                     students.Add(person);
             }
             else
-                MessageBox.Show(isValid.Message);
+                MessageBox.Show(valid.Message);
 
             FillDGV();
         }
@@ -50,9 +54,10 @@ namespace StudentDGV
         {
             
             var nCode = txtNationalCode.Text;
-            if (!txtNationalCode.Text.NCodeValidation().IsSuccess)
+            var validateNationalCode = nCode.NCodeValidation();
+            if (!validateNationalCode.IsSuccess)
             {
-                MessageBox.Show(txtNationalCode.Text.NCodeValidation().Message);
+                MessageBox.Show(validateNationalCode.Message);
                 return;
             }
 
@@ -66,21 +71,23 @@ namespace StudentDGV
         }
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            
+
             var nCode = txtNationalCode.Text;
-            if (!txtNationalCode.Text.NCodeValidation().IsSuccess)
+            var validateNationalCode = nCode.NCodeValidation();
+            if (!validateNationalCode.IsSuccess)
             {
-                MessageBox.Show(txtNationalCode.Text.NCodeValidation().Message);
+                MessageBox.Show(validateNationalCode.Message);
                 return;
             }
             for (int i = 0; i < students.Count; i++)
             {
-                if (students[i].NationalCode == nCode)
+                var student = students[i];
+                if (student.NationalCode == nCode)
                 {
-                    students[i].FirstName= txtName.Text;
-                    students[i].LastName= txtFamily.Text;
-                    students[i].NationalCode = txtNationalCode.Text;
-                    students[i].Gender= txtGender.Text;
+                    student.FirstName= txtName.Text;
+                    student.LastName= txtFamily.Text;
+                    student.NationalCode = txtNationalCode.Text;
+                    student.Gender= txtGender.Text;
                 }
             }
             FillDGV();

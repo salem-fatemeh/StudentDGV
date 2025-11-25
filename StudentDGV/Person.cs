@@ -9,16 +9,18 @@ namespace StudentDGV
 {
     public class Person
     {
+        
         public OperationResult Validation()
         {
+            
             var valid = new OperationResult();
             var v1 = string.IsNullOrEmpty(FirstName);
             var v2 = string.IsNullOrEmpty(LastName);
             var v3 = string.IsNullOrEmpty(Gender);
-            if (v1 || v2 || v3)
+            var v4 = string.IsNullOrEmpty(NationalCode);
+            if (v1 || v2 || v3 || v4)
             {
-                valid.IsSuccess = false;
-                valid.Message = "لطفا تمامی اطلاعات را کامل کنید";
+                return OperationResult.Failed("لطفا تمامی اطلاعات را وارد کنید");
             }
             else
                 valid.IsSuccess = true;

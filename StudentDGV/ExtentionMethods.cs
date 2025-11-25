@@ -11,13 +11,7 @@ namespace StudentDGV
         public static OperationResult NCodeValidation(this string nationalCode)
         {
             var valid = new OperationResult();
-            valid.IsSuccess = true;
-            if (string.IsNullOrEmpty(nationalCode))
-            {
-                valid.IsSuccess = false;
-                valid.Message = "کدملی را وارد کنید";
-            }
-            else if(nationalCode.Length != 10)
+            if(nationalCode.Length != 10)
             {
                 valid.IsSuccess = false;
                 valid.Message = "کدملی نامعتبر است";
